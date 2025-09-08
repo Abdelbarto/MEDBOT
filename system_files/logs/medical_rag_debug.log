@@ -1,0 +1,88 @@
+2025-08-29 11:52:11,603 - MedicalRAG - INFO - FR: Système de débogage initialisé | EN: Debugging system initialized
+2025-08-29 11:52:12,984 - MedicalRAG - INFO - FR: Grader de pertinence initialisé | EN: Retrieval grader initialized
+2025-08-29 11:52:12,984 - MedicalRAG - INFO - FR: Configuration initialisée avec le profil: balanced | EN: Configuration initialized with profile: balanced
+2025-08-29 11:52:12,991 - MedicalRAG - INFO - FR: Structure de dossiers créée | EN: Folder structure created
+2025-08-29 11:52:12,991 - MedicalRAG - WARNING - FR: psutil non disponible, profil par défaut: balanced | EN: psutil not available, default profile: balanced
+2025-08-29 11:52:12,991 - MedicalRAG - INFO - FR: Initialisation du système RAG | EN: Initializing RAG system
+2025-08-29 11:52:12,991 - MedicalRAG - INFO - FR: Configuration initialisée avec le profil: balanced | EN: Configuration initialized with profile: balanced
+2025-08-29 11:52:12,992 - MedicalRAG - INFO - FR: Base de données de cache initialisée | EN: Cache database initialized
+2025-08-29 11:52:12,992 - MedicalRAG - INFO - FR: Constructeur de mémoire vectorielle initialisé | EN: Vector memory builder initialized
+2025-08-29 11:52:13,017 - chromadb.telemetry.product.posthog - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-08-29 11:52:13,428 - MedicalRAG - INFO - FR: Client LLM de base initialisé pour llama3.2:1b | EN: Base LLM client initialized for llama3.2:1b
+2025-08-29 11:52:13,428 - MedicalRAG - INFO - FR: Configuration initialisée avec le profil: balanced | EN: Configuration initialized with profile: balanced
+2025-08-29 11:52:13,440 - MedicalRAG - INFO - FR: Système de monitoring de qualité initialisé | EN: Quality monitoring system initialized
+2025-08-29 11:52:13,440 - MedicalRAG - INFO - FR: Monitoring de qualité activé | EN: Quality monitoring activated
+2025-08-29 11:52:13,440 - MedicalRAG - INFO - FR: Système RAG initialisé avec le profil: balanced | EN: RAG System initialized with profile: balanced
+2025-08-29 11:52:13,440 - MedicalRAG - INFO - FR: Cache: 0 entrées | EN: Cache: 0 entries
+2025-08-29 11:52:13,440 - MedicalRAG - INFO - FR: Chargement des documents | EN: Loading documents
+2025-08-29 11:52:13,440 - MedicalRAG - WARNING - FR: Aucun fichier PDF trouvé dans uploaded_docs/permanent | EN: No PDF files found in uploaded_docs/permanent
+2025-08-29 11:52:13,440 - MedicalRAG - WARNING - FR: Aucun fichier PDF trouvé dans uploaded_docs/temporary | EN: No PDF files found in uploaded_docs/temporary
+2025-08-29 11:52:13,440 - MedicalRAG - WARNING - FR: Aucun document n'a été chargé | EN: No documents were loaded
+2025-08-29 11:52:13,442 - MedicalRAG - INFO - FR: Rapport de qualité généré pour 1 jours | EN: Quality report generated for 1 days
+2025-08-29 11:52:13,442 - MedicalRAG - INFO - Data: {
+  "system_health": "UNKNOWN",
+  "quality_score": "N/A"
+}
+2025-08-29 11:52:29,287 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+2025-08-29 11:52:29,299 - quality_monitor - INFO - QUERY_PERFORMANCE: {"timestamp": "2025-08-29T11:52:29.299331", "question_hash": "ee2047a0172f", "performance": {"retrieval_time": 1.24, "generation_time": 0.0, "total_time": 1.24}, "quality": {"citations_count": 0, "confidence_level": "unknown", "validation_success": false}, "validation_details": {"citation_valid": false, "medical_consistency": false, "factual_alignment": false}}
+2025-08-29 11:52:29,343 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+2025-08-29 11:52:29,346 - quality_monitor - INFO - QUERY_PERFORMANCE: {"timestamp": "2025-08-29T11:52:29.346430", "question_hash": "19eb25dc81a2", "performance": {"retrieval_time": 0.044, "generation_time": 0.0, "total_time": 0.044}, "quality": {"citations_count": 0, "confidence_level": "unknown", "validation_success": false}, "validation_details": {"citation_valid": false, "medical_consistency": false, "factual_alignment": false}}
+2025-08-29 11:52:29,373 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+2025-08-29 11:52:29,375 - quality_monitor - INFO - QUERY_PERFORMANCE: {"timestamp": "2025-08-29T11:52:29.375744", "question_hash": "a8e3bedd0ece", "performance": {"retrieval_time": 0.028, "generation_time": 0.0, "total_time": 0.028}, "quality": {"citations_count": 0, "confidence_level": "unknown", "validation_success": false}, "validation_details": {"citation_valid": false, "medical_consistency": false, "factual_alignment": false}}
+2025-08-29 11:52:29,393 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+2025-08-29 11:52:29,394 - quality_monitor - INFO - QUERY_PERFORMANCE: {"timestamp": "2025-08-29T11:52:29.394628", "question_hash": "5f2bfdf8fb40", "performance": {"retrieval_time": 0.018, "generation_time": 0.0, "total_time": 0.018}, "quality": {"citations_count": 0, "confidence_level": "unknown", "validation_success": false}, "validation_details": {"citation_valid": false, "medical_consistency": false, "factual_alignment": false}}
+2025-08-29 11:52:29,410 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+2025-08-29 11:52:29,411 - quality_monitor - INFO - QUERY_PERFORMANCE: {"timestamp": "2025-08-29T11:52:29.411621", "question_hash": "007978212e61", "performance": {"retrieval_time": 0.016, "generation_time": 0.0, "total_time": 0.016}, "quality": {"citations_count": 0, "confidence_level": "unknown", "validation_success": false}, "validation_details": {"citation_valid": false, "medical_consistency": false, "factual_alignment": false}}
+2025-08-29 11:52:46,342 - MedicalRAG - INFO - FR: Interruption par l'utilisateur | EN: Interrupted by user
+2025-08-29 11:52:46,344 - MedicalRAG - INFO - FR: Arrêt du système | EN: System shutdown
+2025-08-29 11:52:46,344 - MedicalRAG - WARNING - FR: Opération lente détectée: main_application (33.353s) | EN: Slow operation detected: main_application (33.353s)
+2025-08-29 11:52:46,344 - MedicalRAG - WARNING - Data: {
+  "duration": 33.3530330657959,
+  "operation": "main_application"
+}
+2025-08-29 11:52:46,352 - MedicalRAG - INFO - FR: Documents temporaires supprimés de la base de données | EN: Temporary documents removed from database
+2025-08-29 11:52:46,357 - MedicalRAG - INFO - FR: Rapport de qualité généré pour 1 jours | EN: Quality report generated for 1 days
+2025-08-29 11:52:46,357 - MedicalRAG - INFO - Data: {
+  "system_health": "WARNING",
+  "quality_score": "D"
+}
+2025-08-29 11:52:46,357 - MedicalRAG - INFO - FR: Session terminée - Durée: 32.9s, Requêtes: 5 | EN: Session ended - Duration: 32.9s, Queries: 5
+2025-08-29 11:52:46,357 - MedicalRAG - INFO - FR: Temps moyen par requête: 0.269s | EN: Average time per query: 0.269s
+2025-08-29 11:58:32,299 - MedicalRAG - INFO - FR: Système de débogage initialisé | EN: Debugging system initialized
+2025-08-29 11:58:32,299 - MedicalRAG - INFO - FR: Grader de pertinence initialisé | EN: Retrieval grader initialized
+2025-08-29 11:58:32,299 - MedicalRAG - INFO - FR: Configuration initialisée avec le profil: balanced | EN: Configuration initialized with profile: balanced
+2025-08-29 11:58:32,303 - MedicalRAG - INFO - FR: Initialisation du serveur web RAG | EN: RAG web server initialization
+2025-08-29 11:58:32,303 - MedicalRAG - INFO - FR: Configuration initialisée avec le profil: balanced | EN: Configuration initialized with profile: balanced
+2025-08-29 11:58:32,305 - MedicalRAG - INFO - FR: Base de données de cache initialisée | EN: Cache database initialized
+2025-08-29 11:58:32,305 - MedicalRAG - INFO - FR: Constructeur de mémoire vectorielle initialisé | EN: Vector memory builder initialized
+2025-08-29 11:58:32,333 - chromadb.telemetry.product.posthog - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-08-29 11:58:32,418 - MedicalRAG - INFO - FR: Client LLM de base initialisé pour llama3.2:1b | EN: Base LLM client initialized for llama3.2:1b
+2025-08-29 11:58:32,418 - MedicalRAG - INFO - FR: Configuration initialisée avec le profil: balanced | EN: Configuration initialized with profile: balanced
+2025-08-29 11:58:32,427 - MedicalRAG - INFO - FR: Moteur de validation initialisé | EN: Response validation engine initialized
+2025-08-29 11:58:32,427 - MedicalRAG - INFO - FR: Engine de validation activé | EN: Validation engine activated
+2025-08-29 11:58:32,428 - MedicalRAG - INFO - FR: Système de monitoring de qualité initialisé | EN: Quality monitoring system initialized
+2025-08-29 11:58:32,428 - MedicalRAG - INFO - FR: Monitoring de qualité activé | EN: Quality monitoring activated
+2025-08-29 11:58:32,428 - MedicalRAG - INFO - FR: Système RAG initialisé avec le profil: balanced | EN: RAG System initialized with profile: balanced
+2025-08-29 11:58:32,428 - MedicalRAG - INFO - FR: Cache: 5 entrées | EN: Cache: 5 entries
+2025-08-29 11:58:32,428 - MedicalRAG - WARNING - FR: Aucun fichier PDF trouvé dans uploaded_docs/permanent | EN: No PDF files found in uploaded_docs/permanent
+2025-08-29 11:58:32,428 - MedicalRAG - WARNING - FR: Aucun fichier PDF trouvé dans uploaded_docs/temporary | EN: No PDF files found in uploaded_docs/temporary
+2025-08-29 11:58:32,428 - MedicalRAG - WARNING - FR: Aucun document n'a été chargé | EN: No documents were loaded
+2025-08-29 11:58:32,428 - MedicalRAG - INFO - FR: Système RAG initialisé avec succès | EN: RAG system initialized successfully
+2025-08-29 11:58:32,446 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.220.27.74:8000
+2025-08-29 11:58:32,446 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-29 11:58:45,905 - werkzeug - INFO - 127.0.0.1 - - [29/Aug/2025 11:58:45] "GET / HTTP/1.1" 200 -
+2025-08-29 11:58:45,926 - werkzeug - INFO - 127.0.0.1 - - [29/Aug/2025 11:58:45] "GET /style.css HTTP/1.1" 200 -
+2025-08-29 11:58:45,943 - werkzeug - INFO - 127.0.0.1 - - [29/Aug/2025 11:58:45] "GET /app.js HTTP/1.1" 200 -
+2025-08-29 11:58:46,496 - MedicalRAG - INFO - FR: Rapport de qualité généré pour 1 jours | EN: Quality report generated for 1 days
+2025-08-29 11:58:46,496 - MedicalRAG - INFO - Data: {
+  "system_health": "UNKNOWN",
+  "quality_score": "N/A"
+}
+2025-08-29 11:58:46,496 - werkzeug - INFO - 127.0.0.1 - - [29/Aug/2025 11:58:46] "GET /api/health HTTP/1.1" 200 -
+2025-08-29 11:58:46,505 - werkzeug - INFO - 127.0.0.1 - - [29/Aug/2025 11:58:46] "GET /api/documents HTTP/1.1" 200 -
+2025-08-29 11:58:46,544 - werkzeug - INFO - 127.0.0.1 - - [29/Aug/2025 11:58:46] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2025-08-29 11:58:46,687 - werkzeug - INFO - 127.0.0.1 - - [29/Aug/2025 11:58:46] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+2025-08-29 11:58:46,919 - werkzeug - INFO - 127.0.0.1 - - [29/Aug/2025 11:58:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical RAG Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<!-- Markdown parsing -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<!-- HTML sanitization -->
+<script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.7/dist/purify.min.js"></script>
+
+<!-- Initialisation de marked avec les bonnes options -->
+<script>
+if (typeof marked !== 'undefined') {
+    marked.setOptions({
+        breaks: true,           // Convertir \n en <br>
+        gfm: true,             // GitHub Flavored Markdown
+        sanitize: false,       // Laisser DOMPurify s'occuper de la sanitization
+        smartLists: true,      // Listes intelligentes
+        smartypants: false     // Pas de remplacement typographique automatique
+    });
+    console.log('✅ Marked.js configuré correctement');
+} else {
+    console.error('❌ Marked.js non trouvé');
+}
+
+if (typeof DOMPurify !== 'undefined') {
+    console.log('✅ DOMPurify chargé correctement');
+} else {
+    console.error('❌ DOMPurify non trouvé');
+}
+</script>
+
+<body>
+    <!-- Workspace Selection Screen -->
+    <div id="workspaceSelection" class="screen active">
+        <div class="workspace-container">
+            <div class="workspace-header">
+                <h1>Medical RAG Assistant</h1>
+                <p>Ready to help with your medical questions</p>
+            </div>
+
+            <div class="workspace-options">
+                <div class="workspace-card" data-type="specific">
+                    <div class="workspace-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/>
+                        </svg>
+                    </div>
+                    <h3>Permanent Workspace</h3>
+                    <p>Work with existing permanent documents from your library</p>
+                    <div class="btn btn--primary btn--full-width">Get Started</div>
+                </div>
+
+                <div class="workspace-card" data-type="temporary">
+                    <div class="workspace-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.7L16.2,16.2Z"/>
+                        </svg>
+                    </div>
+                    <h3>Temporary Workspace</h3>
+                    <p>Select and upload PDFs for this session</p>
+                    <div class="btn btn--secondary btn--full-width">Get Started</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Selection Screen -->
+    <div id="documentSelection" class="screen">
+        <div class="container">
+            <div class="document-header">
+                <button class="back-btn btn btn--outline">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+                    </svg>
+                    Back
+                </button>
+                <div>
+                    <h2 id="documentSelectionTitle">Choose documents for your workspace</h2>
+                    <p id="documentSelectionDesc">Select the documents you want to work with</p>
+                </div>
+            </div>
+
+            <!-- Upload Section (shown for temporary workspace only) -->
+            <div id="uploadSection" class="upload-section hidden">
+                <div id="uploadZone" class="upload-zone">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                    </svg>
+                    <h3>Drop files here or click to browse</h3>
+                    <p>Supports PDF, TXT, DOC, DOCX files</p>
+                    <div class="btn btn--outline">Browse Files</div>
+                </div>
+                <input type="file" id="fileInput" multiple accept=".pdf,.txt,.doc,.docx" style="display: none;">
+            </div>
+
+            <!-- Document Grid -->
+            <div id="documentGrid" class="document-grid">
+                <!-- Documents will be populated here by JavaScript -->
+            </div>
+
+            <!-- Selection Actions -->
+            <div class="selection-actions">
+                <div class="selected-count">0 document(s) selected</div>
+                <div class="action-buttons">
+                    <button id="clearSelection" class="btn btn--outline">Clear Selection</button>
+                    <button id="startWorkspace" class="btn btn--primary">Start Workspace</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Interface -->
+    <div id="mainInterface" class="screen">
+        <div class="main-layout">
+            <!-- Chat Panel -->
+            <div class="chat-panel">
+                <div class="chat-header">
+                    <div class="workspace-info">
+                        <h3>Medical RAG Assistant</h3>
+                        <p>Ready to help with your medical questions</p>
+                    </div>
+                    <button id="switchWorkspace" class="btn btn--outline btn--sm">Switch Workspace</button>
+                </div>
+
+                <div id="chatMessages" class="chat-messages">
+                    <!-- Chat messages will be added here -->
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="chat-input">
+                        <textarea id="questionInput" placeholder="Ask me any medical question..." rows="1"></textarea>
+                        <button id="sendQuestion" class="send-btn" disabled>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Panel -->
+            <div class="document-panel">
+                <div class="document-header">
+                    <div class="document-info">
+                        <h4>Select a document</h4>
+                        <div class="document-controls">
+                            <select id="documentSelector" class="form-control">
+                                <option value="">Select a document to view</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="document-viewer">
+                    <div class="pdf-viewer hidden">
+                        <div class="pdf-controls">
+                            <div class="navigation-controls">
+                                <button id="prevPage" class="btn btn--outline btn--sm">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
+                                    </svg>
+                                </button>
+                                <span id="pageInfo">Page 1 of 1</span>
+                                <button id="nextPage" class="btn btn--outline btn--sm">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="zoom-controls">
+                                <button id="zoomOut" class="btn btn--outline btn--sm">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19,13H5V11H19V13Z"/>
+                                    </svg>
+                                </button>
+                                <span id="zoomLevel">100%</span>
+                                <button id="zoomIn" class="btn btn--outline btn--sm">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="pdf-container">
+                            <canvas id="pdfCanvas"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="viewer-placeholder">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                        </svg>
+                        <h3>Select a document to view</h3>
+                        <p>Choose a document from the dropdown above to view its contents</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Error</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>An error occurred</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--primary modal-close">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
